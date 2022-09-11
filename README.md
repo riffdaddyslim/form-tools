@@ -28,7 +28,7 @@ Library to help in creating selects dynamically, formatting data, validating dat
       - Steet names
       - Zips
       - Name
- - Country
+- Country
   - Code
   - Code3
   - Name
