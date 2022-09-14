@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tools Testing</title>
+    <style>
+        input, select {
+            padding: 0.5rem;
+        }
+        [data-status=error] {
+            outline: 1px solid red;
+        }
+        div {
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 150px auto;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div>
+            <label for="phoneNumber">Phone</label>
+            <input type="phone" name="phoneNumber">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" name="email">
+        </div>
+        <div>
+            <label for="url">URL</label>
+            <input type="url" name="url">
+        </div>
+        <div>
+            <label for="mi">MI</label>
+            <input type="mi" name="mi">
+        </div>
+        <div>
+            <label for="zip">ZIP</label>
+            <input type="zip" name="zip">
+        </div>
+        <div>
+            <label for="social">Social</label>
+            <input type="social" name="social">
+        </div>
+        <div>
+            <label for="state">State</label>
+            <select type="state" name="state"></select>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script src="main.js" type="module"></script>
+</body>
+</html>

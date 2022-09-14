@@ -1,0 +1,23 @@
+{
+  "name": "form-tools",
+  "version": "1.0.0",
+  "description": "Library to help in creating selects dynamically, formatting data, validating data, and working with form data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riffdaddyslim/form-tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riffdaddyslim/form-tools/issues"
+  },
+  "homepage": "https://github.com/riffdaddyslim/form-tools#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
