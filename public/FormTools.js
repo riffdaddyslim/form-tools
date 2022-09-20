@@ -1,3 +1,5 @@
+// ! DATES AND CUSTOM FORMATTING AND VALIDATION PATTERNS
+
 /**
  * @file FormTools.js File for all items related to FormTools class
  * @since 9/14/2022
@@ -240,8 +242,8 @@ class FormTools {
     ]
 
     /**
-     * @memberof FormFormatter
-     * @name KEYS
+     * @memberof FormTools
+     * @name COUNTRIES
      * @description All simple ISO 3166 country data including: 2-character, 3-character, full country name, phone code, and numeric code. Sorted alphabetical by country name (special characters on bottom)
      * @static
      */
@@ -2134,6 +2136,12 @@ class FormTools {
      * @memberof FormTools
      */
     static formatPhone(input) {
+        const format = (target, number) => {
+            if (number.length < 3) { }
+            else if (number.length < 6) target.value = `(${number.substring(0, 3)}) ${number.substring(3)}`
+            else target.value = `(${number.substring(0, 3)}) ${number.substring(3, 6)}-${number.substring(6)}`
+        }
+
         input.dataset.value = input.value
         
         input.addEventListener("keydown", e => {
@@ -2143,14 +2151,11 @@ class FormTools {
 
         input.addEventListener("keyup", e => {
             const NUMBER = FormTools.getNumbers(e.target.value)
-            if (e.key != "Backspace") {
-                if (NUMBER.length < 3) { }
-                else if (NUMBER.length < 6) e.target.value = `(${NUMBER.substring(0, 3)}) ${NUMBER.substring(3)}`
-                else e.target.value = `(${NUMBER.substring(0, 3)}) ${NUMBER.substring(3, 6)}-${NUMBER.substring(6)}`
-            }
-
+            if (e.key != "Backspace") format(e.target, NUMBER)
             e.target.dataset.value = NUMBER
         })
+
+        if (input.dataset.value != "") format(input, input.dataset.value)
     }
 
     /**
@@ -2179,7 +2184,17 @@ class FormTools {
         })
     }
 
+    /**
+     * Function for adding event listeners to format social inputs
+     * @param {HTMLInputElement} input input to format
+     * @memberof FormTools
+     */
     static formatSocial(input) {
+        const format = (target, number) => {
+            if (number.length < 3) { }
+            else if (number.length < 5) target.value = `${number.substring(0, 3)}-${number.substring(3)}`
+            else target.value = `${number.substring(0, 3)}-${number.substring(3, 5)}-${number.substring(5)}`
+        }
         input.dataset.value = input.value
         
         input.addEventListener("keydown", e => {
@@ -2189,14 +2204,11 @@ class FormTools {
 
         input.addEventListener("keyup", e => {
             const NUMBER = FormTools.getNumbers(e.target.value)
-            if (e.key != "Backspace") {
-                if (NUMBER.length < 3) { }
-                else if (NUMBER.length < 5) e.target.value = `${NUMBER.substring(0, 3)}-${NUMBER.substring(3)}`
-                else e.target.value = `${NUMBER.substring(0, 3)}-${NUMBER.substring(3, 5)}-${NUMBER.substring(5)}`
-            }
-
+            if (e.key != "Backspace") format(e.target, NUMBER)
             e.target.dataset.value = NUMBER
         })
+
+        if (input.dataset.value != "") format(input, input.dataset.value)
     }
 
     //#endregion
@@ -2258,6 +2270,12 @@ class FormTools {
             nullString: "Select a State",
             values: FormTools.STATES,
             keys: ["abbreviation", "name"]
+        },
+        country: {
+            builder: FormTools.buildSelect,
+            nullString: "Select a Country",
+            values: FormTools.COUNTRIES,
+            keys: ["code", "name"]
         }
     }
 
@@ -2272,7 +2290,7 @@ class FormTools {
      * @param {Function|null} validate Function to use for validation
      * @param {Function|null} format Function to use for formatting 
      */
-     addInput({ type, validate = null, format = null } = {}) {
+    addInput({ type, validate = null, format = null } = {}) {
         if (!type || typeof(type) != "string") throw new Error("Missing 'type' param or 'type' param is not a string")
         if (validate && typeof(validate) != "function") throw new Error("'validate' param is not a function")
         if (format && typeof(format) != "function") throw new Error("'format' param is not a function")
@@ -2308,6 +2326,21 @@ class FormTools {
             nullString,
             values,
             keys
+        }
+    }
+
+    // ! CREATE NEW PATTERNS OR USER REGEX OR BOTH????
+    /**
+     * Function used to add a format pattern to a given input or input type - WIP
+     * @param {String} pattern Pattern to format the input to
+     * @param {HTMLInputElement|String} target Input element or input type to apply format to
+     */
+    addFormat(pattern, target) {
+        if (target instanceof HTMLInputElement) {
+            // Is Element
+        }
+        else {
+            // Is type
         }
     }
 
